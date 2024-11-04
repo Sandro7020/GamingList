@@ -1,0 +1,37 @@
+package com.info.GamingList.controller;
+
+import com.info.GamingList.model.Videojuego;
+import com.info.GamingList.service.ServicioVideojuego;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@CrossOrigin(origins = "http://localhost:5173")
+@RestController
+@RequestMapping("/api/videojuegos")
+public class VideojuegoController {
+
+    private static final ServicioVideojuego servicioVideojuego = new ServicioVideojuego();
+
+    @GetMapping("/consultar")
+    public ResponseEntity<?> consultarVideojuegos() {
+        try {
+            List<Videojuego> videojuegos = servicioVideojuego.obtenerVideojuegos();
+            return new ResponseEntity<>(videojuegos, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/agregar")
+    public ResponseEntity<?> agregarVideojuego(@RequestBody Videojuego videojuego) {
+        try {
+            Videojuego nuevoJuego = servicioVideojuego.agregarJuego(videojuego);
+            return new ResponseEntity<>(nuevoJuego, HttpStatus.CREATED);
+        } catch(Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+}
