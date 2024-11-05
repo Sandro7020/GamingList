@@ -26,13 +26,4 @@ public class Videojuego {
         this.descripcion = descripcion;
         this.generos = generos;
     }
-
-    @Override
-    public String toString() {
-        return "Videojuego {" +
-                "nombre='" + nombre + '\'' +
-                ", descripcion='" + descripcion + '\'' +
-                ", generos=" + generos +
-                '}';
-    }
 }

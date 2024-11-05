@@ -1,0 +1,38 @@
+package com.info.GamingList.controller;
+
+
+import com.info.GamingList.model.Review;
+import com.info.GamingList.service.ServicioReview;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@CrossOrigin(origins = "http://localhost:5173")
+@RestController
+@RequestMapping("/api/reseñas")
+public class ReviewController {
+
+    private static final ServicioReview servicioReview = new ServicioReview();
+
+    @GetMapping("/consultar/{id}")
+    public ResponseEntity<?> consultarReviews(@PathVariable int id) {
+        try {
+            List<Review> reviewsId = servicioReview.obtenerReviewsId(id);
+            return new ResponseEntity<>(reviewsId, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/agregar")
+    public ResponseEntity<?> agregarReview(@RequestBody Review review) {
+        try {
+            Review nuevaReview = servicioReview.agregarReview(review);
+            return new ResponseEntity<>(nuevaReview, HttpStatus.CREATED);
+        } catch(Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+}

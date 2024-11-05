@@ -26,7 +26,7 @@ public class VideojuegoController {
     }
 
     @GetMapping("/consultar/{id}")
-    public ResponseEntity<?> consultarVideojuego(@PathVariable Long id) {
+    public ResponseEntity<?> consultarVideojuego(@PathVariable int id) {
         try {
             Videojuego videojuego = servicioVideojuego.obtenerVideojuego(id);
             if (videojuego != null) {

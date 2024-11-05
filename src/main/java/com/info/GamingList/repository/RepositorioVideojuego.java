@@ -61,6 +61,7 @@ public class RepositorioVideojuego {
         guardarDatos();
     }
 
+    /*
     public void actualizar(Videojuego videojuego) {
         videojuegos = videojuegos.stream()
             .map(v -> v.getId() == videojuego.getId() ? videojuego : v)
@@ -72,4 +73,5 @@ public class RepositorioVideojuego {
         videojuegos.removeIf(v -> v.getId() == id);
         guardarDatos();
     }
+     */
 }

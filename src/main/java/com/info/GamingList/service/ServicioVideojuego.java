@@ -16,7 +16,7 @@ public class ServicioVideojuego {
         return repositorioVideojuego.obtenerTodos();
     }
 
-    public Videojuego obtenerVideojuego(Long id) {
+    public Videojuego obtenerVideojuego(int id) {
         return repositorioVideojuego.obtenerPorId(id);
     }
 
