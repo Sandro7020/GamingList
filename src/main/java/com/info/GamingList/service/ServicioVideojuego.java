@@ -16,6 +16,10 @@ public class ServicioVideojuego {
         return repositorioVideojuego.obtenerTodos();
     }
 
+    public Videojuego obtenerVideojuego(Long id) {
+        return repositorioVideojuego.obtenerPorId(id);
+    }
+
     public Videojuego agregarJuego(Videojuego videojuego) throws Exception {
         Optional<Videojuego> existente = Optional.ofNullable(repositorioVideojuego.obtenerPorNombre(videojuego.getNombre()));
         if (existente.isPresent()) {

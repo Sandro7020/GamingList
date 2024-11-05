@@ -25,6 +25,20 @@ public class VideojuegoController {
         }
     }
 
+    @GetMapping("/consultar/{id}")
+    public ResponseEntity<?> consultarVideojuego(@PathVariable Long id) {
+        try {
+            Videojuego videojuego = servicioVideojuego.obtenerVideojuego(id);
+            if (videojuego != null) {
+                return new ResponseEntity<>(videojuego, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("Videojuego no encontrado", HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PostMapping("/agregar")
     public ResponseEntity<?> agregarVideojuego(@RequestBody Videojuego videojuego) {
         try {
