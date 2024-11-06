@@ -11,7 +11,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
-@RequestMapping("/api/reseñas")
+@RequestMapping("/api/reviews")
 public class ReviewController {
 
     private static final ServicioReview servicioReview = new ServicioReview();
@@ -21,6 +21,16 @@ public class ReviewController {
         try {
             List<Review> reviewsId = servicioReview.obtenerReviewsId(id);
             return new ResponseEntity<>(reviewsId, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/consultar/calificacion/{id}")
+    public ResponseEntity<?> consultarCalificacion(@PathVariable int id) {
+        try {
+            float calificacion = servicioReview.calcularCalificacionJuego(id);
+            return new ResponseEntity<>(calificacion, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }

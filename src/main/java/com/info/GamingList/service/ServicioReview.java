@@ -19,4 +19,16 @@ public class ServicioReview {
         repositorioReview.agregar(review);
         return review;
     }
+
+    public float calcularCalificacionJuego(int id) {
+        List<Review> reviews = repositorioReview.obtenerPorId(id);
+        float calificacionPromedio = 0;
+        if (!reviews.isEmpty()) {
+            for (Review review : reviews) {
+                calificacionPromedio += review.getCalificacion();
+            }
+            return calificacionPromedio / reviews.size();
+        }
+        return 0;
+    }
 }
