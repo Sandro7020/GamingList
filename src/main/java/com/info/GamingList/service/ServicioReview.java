@@ -15,7 +15,17 @@ public class ServicioReview {
         return repositorioReview.obtenerPorId(id);
     }
 
-    public Review agregarReview(Review review) throws Exception {
+    public boolean validarReviewUsuario(int id, String usuario) {
+        List<Review> reviews = obtenerReviewsId(id);
+        for (Review review : reviews) {
+            if (review.getNomUsuario().equals(usuario)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Review agregarReview(Review review) {
         repositorioReview.agregar(review);
         return review;
     }

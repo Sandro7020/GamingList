@@ -1,6 +1,5 @@
 package com.info.GamingList.controller;
 
-
 import com.info.GamingList.model.Review;
 import com.info.GamingList.service.ServicioReview;
 import org.springframework.http.HttpStatus;
@@ -21,6 +20,16 @@ public class ReviewController {
         try {
             List<Review> reviewsId = servicioReview.obtenerReviewsId(id);
             return new ResponseEntity<>(reviewsId, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("consultar/{usuario}/{id}")
+    public ResponseEntity<?> consultarReviewByUsuario(@PathVariable int id, @PathVariable String usuario) {
+        try {
+            boolean existe = servicioReview.validarReviewUsuario(id, usuario);
+            return new ResponseEntity<>(existe, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
