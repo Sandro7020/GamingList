@@ -16,19 +16,26 @@ public class RepositorioUsuario {
     private final ObjectMapper mapper = new ObjectMapper();
     private List<Usuario> usuarios = new ArrayList<>();
 
-    // Cargar datos del archivo JSON
+    public RepositorioUsuario() {
+        cargarDatos();
+    }
+
     private void cargarDatos() {
         try {
-            usuarios = mapper.readValue(new File(archivo), new TypeReference<>() {
-            });
+            File archivoJson = new File(archivo);
+            if (archivoJson.exists()) {
+                usuarios = mapper.readValue(archivoJson, new TypeReference<>() {});
+            } else {
+                usuarios = new ArrayList<>();
+                System.out.println("Archivo no encontrado, iniciando con lista vacía.");
+            }
         } catch (IOException e) {
             System.out.println("No se pudo cargar el archivo, iniciando con una lista vacía.");
             usuarios = new ArrayList<>();
         }
     }
 
-    // Guardar datos en el archivo JSON
-    private void guardarDatos() {
+    private synchronized void guardarDatos() {
         try {
             mapper.writeValue(new File(archivo), usuarios);
         } catch (IOException e) {
@@ -45,6 +52,16 @@ public class RepositorioUsuario {
     public Usuario obtenerPorUsername(String nombre) {
         cargarDatos();
         return usuarios.stream().filter(u -> u.getUsername().equals(nombre)).findFirst().orElse(null);
+    }
+
+    public void actualizar(Usuario usuarioActual, Usuario usuarioActualizado) {
+        int index = usuarios.indexOf(usuarioActual);
+        if (index != -1) {
+            usuarios.set(index, usuarioActualizado);
+            guardarDatos();
+        } else {
+            System.out.println("El usuario no se encontró en la lista.");
+        }
     }
 
     public void agregar(Usuario usuario) {

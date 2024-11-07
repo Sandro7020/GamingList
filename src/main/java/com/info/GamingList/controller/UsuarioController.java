@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:5173")
@@ -14,6 +15,26 @@ import java.util.Map;
 public class UsuarioController {
 
     private static final ServicioUsuario servicioUsuario = new ServicioUsuario();
+
+    @GetMapping("/agregar/{username}/{id}")
+    public ResponseEntity<?> agregarIdJuego(@PathVariable String username, @PathVariable int id) {
+        try {
+            servicioUsuario.actualizarListaUsuario(username, id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/consultar/{username}/videojuegos")
+    public ResponseEntity<?> consultarIdVideoJuegos(@PathVariable String username) {
+        try {
+            List<Integer> idsJuegos = servicioUsuario.obtenerIds(username);
+            return new ResponseEntity<>(idsJuegos, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Map<String, String> credenciales) {

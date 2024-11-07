@@ -11,7 +11,7 @@ import java.util.List;
 public class Usuario {
     private String username;
     private String clave;
-    private List<String> idJuegos;
+    private List<Integer> idJuegos;
 
     public Usuario() {
         username = "";
@@ -19,9 +19,22 @@ public class Usuario {
         idJuegos = new ArrayList<>();
     }
 
-    public Usuario(String username, String clave, List<String> idJuegos) {
+    public Usuario(String username, String clave, List<Integer> idJuegos) {
         this.username = username;
         this.clave = clave;
         this.idJuegos = idJuegos;
+    }
+
+    public void agregarIdLista(int id) {
+        idJuegos.add(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "username='" + username + '\'' +
+                ", clave='" + clave + '\'' +
+                ", idJuegos=" + idJuegos +
+                '}';
     }
 }

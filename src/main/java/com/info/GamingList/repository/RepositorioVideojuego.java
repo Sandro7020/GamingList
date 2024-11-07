@@ -32,7 +32,7 @@ public class RepositorioVideojuego {
     }
 
     // Guardar datos en el archivo JSON
-    private void guardarDatos() {
+    private synchronized void guardarDatos() {
         try {
             mapper.writeValue(new File(archivo), videojuegos);
         } catch (IOException e) {
@@ -46,7 +46,7 @@ public class RepositorioVideojuego {
         return videojuegos;
     }
 
-    public Videojuego obtenerPorId(long id) {
+    public Videojuego obtenerPorId(int id) {
         cargarDatos();
         return videojuegos.stream().filter(v -> v.getId() == id).findFirst().orElse(null);
     }
@@ -60,18 +60,4 @@ public class RepositorioVideojuego {
         videojuegos.add(videojuego);
         guardarDatos();
     }
-
-    /*
-    public void actualizar(Videojuego videojuego) {
-        videojuegos = videojuegos.stream()
-            .map(v -> v.getId() == videojuego.getId() ? videojuego : v)
-            .toList();
-        guardarDatos();
-    }
-
-    public void eliminar(long id) {
-        videojuegos.removeIf(v -> v.getId() == id);
-        guardarDatos();
-    }
-     */
 }

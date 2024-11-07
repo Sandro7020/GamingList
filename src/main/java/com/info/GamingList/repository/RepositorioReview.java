@@ -32,7 +32,7 @@ public class RepositorioReview {
     }
 
     // Guardar datos en el archivo JSON
-    private void guardarDatos() {
+    private synchronized void guardarDatos() {
         try {
             mapper.writeValue(new File(archivo), reviews);
         } catch (IOException e) {
@@ -60,18 +60,4 @@ public class RepositorioReview {
         reviews.add(review);
         guardarDatos();
     }
-
-    /*
-    public void actualizar(Review review) {
-        reviews = reviews.stream()
-            .map(r -> r.getIdJuego() == review.getIdJuego() ? review : r)
-            .toList();
-        guardarDatos();
-    }
-
-    public void eliminar(long id) {
-        reviews.removeIf(r -> r.getIdJuego() == id);
-        guardarDatos();
-    }
-     */
 }

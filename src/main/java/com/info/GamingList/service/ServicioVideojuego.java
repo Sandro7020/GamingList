@@ -4,6 +4,7 @@ import com.info.GamingList.model.Videojuego;
 import com.info.GamingList.repository.RepositorioVideojuego;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +15,14 @@ public class ServicioVideojuego {
 
     public List<Videojuego> obtenerVideojuegos() {
         return repositorioVideojuego.obtenerTodos();
+    }
+
+    public List<Videojuego> obtenerVideojuegosPersonal(List<Integer> ids) {
+        List<Videojuego> videojuegos = new ArrayList<>();
+        for (Integer id : ids) {
+            videojuegos.add(obtenerVideojuego(id));
+        }
+        return videojuegos;
     }
 
     public Videojuego obtenerVideojuego(int id) {

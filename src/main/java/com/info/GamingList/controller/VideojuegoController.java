@@ -25,6 +25,16 @@ public class VideojuegoController {
         }
     }
 
+    @PostMapping("/consultar/usuario")
+    public ResponseEntity<?> consultarVideojuegosPersonal(@RequestBody List<Integer> ids) {
+        try {
+            List<Videojuego> videojuegos = servicioVideojuego.obtenerVideojuegosPersonal(ids);
+            return new ResponseEntity<>(videojuegos, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @GetMapping("/consultar/{id}")
     public ResponseEntity<?> consultarVideojuego(@PathVariable int id) {
         try {
