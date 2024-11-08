@@ -58,4 +58,14 @@ public class VideojuegoController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
+
+    @GetMapping("/consultar/id")
+    public ResponseEntity<?> consultarSiguienteId() {
+        try {
+            int id = servicioVideojuego.calcularIdSiguiente();
+            return new ResponseEntity<>(id, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

@@ -37,4 +37,16 @@ public class ServicioVideojuego {
         repositorioVideojuego.agregar(videojuego);
         return videojuego;
     }
+
+    public int calcularIdSiguiente() {
+        List<Videojuego> videojuegos = obtenerVideojuegos();
+        if (videojuegos.isEmpty()) {
+            return 0;
+        }
+        int mayorId = 0;
+        for (Videojuego videojuego : videojuegos) {
+            mayorId = Math.max(mayorId, videojuego.getId());
+        }
+        return mayorId + 1;
+    }
 }

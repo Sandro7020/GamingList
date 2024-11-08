@@ -51,9 +51,9 @@ public class RepositorioReview {
         return reviews.stream().filter(r -> r.getIdJuego() == id).toList();
     }
 
-    public Review obtenerPorUsuario(String usuario) {
+    public List<Review> obtenerPorUsuario(String usuario) {
         cargarDatos();
-        return reviews.stream().filter(r -> r.getNomUsuario().equals(usuario)).findFirst().orElse(null);
+        return reviews.stream().filter(r -> r.getNomUsuario().equals(usuario)).toList();
     }
 
     public void agregar(Review review) {
