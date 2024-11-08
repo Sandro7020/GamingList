@@ -26,6 +26,16 @@ public class UsuarioController {
         }
     }
 
+    @GetMapping("/consultar/{username}/{id}")
+    public ResponseEntity<?> consultarIdJuego(@PathVariable String username, @PathVariable int id) {
+        try {
+            boolean existe = servicioUsuario.verificarIdLista(username, id);
+            return new ResponseEntity<>(existe, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @GetMapping("/consultar/{username}/videojuegos")
     public ResponseEntity<?> consultarIdVideoJuegos(@PathVariable String username) {
         try {

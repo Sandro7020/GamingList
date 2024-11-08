@@ -22,6 +22,11 @@ public class ServicioUsuario {
         throw new Exception("Error autenticando usuario");
     }
 
+    public boolean verificarIdLista(String username, int id) {
+        List<Integer> ids = obtenerIds(username);
+        return ids.contains(id);
+    }
+
     public List<Integer> obtenerIds(String username) {
         Usuario user = repositorioUsuario.obtenerPorUsername(username);
         return new ArrayList<>(user.getIdJuegos());
