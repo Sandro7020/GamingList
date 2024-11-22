@@ -39,7 +39,8 @@ public class ReviewController {
     public ResponseEntity<?> consultarCalificacion(@PathVariable int id) {
         try {
             float calificacion = servicioReview.calcularCalificacionJuego(id);
-            return new ResponseEntity<>(calificacion, HttpStatus.OK);
+            double calificacionRedondeada = Math.round(calificacion * 100.0) / 100.0;
+            return new ResponseEntity<>(calificacionRedondeada, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
