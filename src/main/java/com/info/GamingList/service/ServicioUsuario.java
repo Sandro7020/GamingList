@@ -14,12 +14,12 @@ public class ServicioUsuario {
 
     private final static RepositorioUsuario repositorioUsuario = new RepositorioUsuario();
 
-    public Usuario validarUsuario(String username, String clave) throws Exception {
+    public Usuario validarUsuario(String username, String clave) {
         Usuario user = repositorioUsuario.obtenerPorUsername(username);
         if (user != null && Objects.equals(clave, user.getClave())) {
             return user;
         }
-        throw new Exception("Error autenticando usuario");
+        return null;
     }
 
     public boolean verificarIdLista(String username, int id) {
@@ -54,12 +54,12 @@ public class ServicioUsuario {
         throw new Exception("Error actualizando la lista");
     }
 
-    public Usuario registrarUsuario(Usuario usuario) throws Exception {
+    public boolean registrarUsuario(Usuario usuario) {
         Optional<Usuario> existente = Optional.ofNullable(repositorioUsuario.obtenerPorUsername(usuario.getUsername()));
         if (existente.isPresent()) {
-            throw new Exception("El usuario ya existe.");
+            return false;
         }
         repositorioUsuario.agregar(usuario);
-        return usuario;
+        return true;
     }
 }

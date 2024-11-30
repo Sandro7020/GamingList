@@ -42,7 +42,7 @@ public class VideojuegoController {
             if (videojuego != null) {
                 return new ResponseEntity<>(videojuego, HttpStatus.OK);
             } else {
-                return new ResponseEntity<>("Videojuego no encontrado", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

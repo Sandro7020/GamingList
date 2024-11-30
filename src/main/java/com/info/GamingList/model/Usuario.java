@@ -28,13 +28,4 @@ public class Usuario {
     public void agregarIdLista(int id) {
         idJuegos.add(id);
     }
-
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "username='" + username + '\'' +
-                ", clave='" + clave + '\'' +
-                ", idJuegos=" + idJuegos +
-                '}';
-    }
 }
