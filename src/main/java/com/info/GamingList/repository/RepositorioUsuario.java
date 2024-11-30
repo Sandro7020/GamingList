@@ -43,12 +43,6 @@ public class RepositorioUsuario {
         }
     }
 
-    // Métodos CRUD
-//    public Videojuego obtenerPorId(long id) {
-//        cargarDatos();
-//        return videojuegos.stream().filter(v -> v.getId() == id).findFirst().orElse(null);
-//    }
-
     public Usuario obtenerPorUsername(String nombre) {
         cargarDatos();
         return usuarios.stream().filter(u -> u.getUsername().equals(nombre)).findFirst().orElse(null);

@@ -16,7 +16,7 @@ public class UsuarioController {
 
     private static final ServicioUsuario servicioUsuario = new ServicioUsuario();
 
-    @GetMapping("/agregar/{username}/{id}")
+    @PostMapping("/agregar/{username}/{id}")
     public ResponseEntity<?> agregarIdJuego(@PathVariable String username, @PathVariable int id) {
         try {
             servicioUsuario.actualizarListaUsuario(username, id);
@@ -52,7 +52,11 @@ public class UsuarioController {
             String username = credenciales.get("username");
             String clave = credenciales.get("clave");
             Usuario user = servicioUsuario.validarUsuario(username, clave);
-            return new ResponseEntity<>(user, HttpStatus.OK);
+            if (user != null) {
+                return new ResponseEntity<>(user, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            }
         } catch(Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
@@ -61,8 +65,8 @@ public class UsuarioController {
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody Usuario usuario) {
         try {
-            Usuario nuevoUsuario = servicioUsuario.registrarUsuario(usuario);
-            return new ResponseEntity<>(nuevoUsuario, HttpStatus.CREATED);
+            boolean registroExitoso = servicioUsuario.registrarUsuario(usuario);
+            return new ResponseEntity<>(registroExitoso, HttpStatus.CREATED);
         } catch(Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
