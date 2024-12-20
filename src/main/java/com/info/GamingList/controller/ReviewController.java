@@ -55,4 +55,15 @@ public class ReviewController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
+
+    @PostMapping("/eliminar/{id}")
+    public ResponseEntity<?> eliminarReview(@RequestBody String usuario, @PathVariable int id) {
+        try {
+            servicioReview.eliminarReview(usuario, id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
 }
+
