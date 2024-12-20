@@ -19,7 +19,17 @@ public class UsuarioController {
     @PostMapping("/agregar/{username}/{id}")
     public ResponseEntity<?> agregarIdJuego(@PathVariable String username, @PathVariable int id) {
         try {
-            servicioUsuario.actualizarListaUsuario(username, id);
+            servicioUsuario.actualizarListaUsuario(username, id, true);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/eliminar/{username}/{id}")
+    public ResponseEntity<?> eliminarIdJuego(@PathVariable String username, @PathVariable int id) {
+        try {
+            servicioUsuario.actualizarListaUsuario(username, id, false);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
