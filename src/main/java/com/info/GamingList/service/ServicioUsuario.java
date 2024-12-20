@@ -32,7 +32,7 @@ public class ServicioUsuario {
         return new ArrayList<>(user.getIdJuegos());
     }
 
-    public void actualizarListaUsuario(String user, int id) throws Exception {
+    public void actualizarListaUsuario(String user, int id, boolean opcion) throws Exception {
         Usuario userActual = repositorioUsuario.obtenerPorUsername(user);
         if (userActual == null) {
             throw new Exception("Usuario no encontrado");
@@ -42,14 +42,26 @@ public class ServicioUsuario {
             userActual.setIdJuegos(new ArrayList<>());
         }
 
-        if (!userActual.getIdJuegos().contains(id)) {
+        if(opcion) {
+            if (!userActual.getIdJuegos().contains(id)) {
+                List<Integer> nuevaListaIds = new ArrayList<>(userActual.getIdJuegos());
+                Usuario userActualizado = new Usuario(userActual.getUsername(), userActual.getClave(), nuevaListaIds);
+
+                userActualizado.agregarIdLista(id);
+
+                repositorioUsuario.actualizar(userActual, userActualizado);
+                return;
+            }
+        }
+        else{
             List<Integer> nuevaListaIds = new ArrayList<>(userActual.getIdJuegos());
             Usuario userActualizado = new Usuario(userActual.getUsername(), userActual.getClave(), nuevaListaIds);
 
-            userActualizado.agregarIdLista(id);
+            userActualizado.eliminarIdLista(id);
 
             repositorioUsuario.actualizar(userActual, userActualizado);
             return;
+
         }
         throw new Exception("Error actualizando la lista");
     }
