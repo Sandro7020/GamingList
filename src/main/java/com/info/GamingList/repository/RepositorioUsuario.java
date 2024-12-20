@@ -58,9 +58,9 @@ public class RepositorioUsuario {
         }
     }
 
-    public void eliminarDeListaId(int id) {
+    public void eliminarIdDeListas(int id) {
         cargarDatos();
-        for (Usuario usuario : usuarios) {
+        for (Usuario usuario: usuarios) {
             usuario.eliminarIdLista(id);
         }
         guardarDatos();

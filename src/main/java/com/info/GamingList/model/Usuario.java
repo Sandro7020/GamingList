@@ -31,7 +31,7 @@ public class Usuario {
 
     public void eliminarIdLista(int id){
         if(idJuegos.contains(id)) {
-            idJuegos.remove(id);
+            idJuegos.remove((Integer) id);
         }
     }
 }

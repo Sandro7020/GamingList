@@ -72,4 +72,14 @@ public class UsuarioController {
         }
     }
 
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<?> eliminarIdListas(@PathVariable int id) {
+        try {
+            servicioUsuario.eliminarIdListasUsuarios(id);
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }

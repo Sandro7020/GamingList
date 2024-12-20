@@ -62,4 +62,8 @@ public class ServicioUsuario {
         repositorioUsuario.agregar(usuario);
         return true;
     }
+
+    public void eliminarIdListasUsuarios(int id) {
+        repositorioUsuario.eliminarIdDeListas(id);
+    }
 }
