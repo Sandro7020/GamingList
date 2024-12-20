@@ -28,4 +28,10 @@ public class Usuario {
     public void agregarIdLista(int id) {
         idJuegos.add(id);
     }
+
+    public void eliminarIdLista(int id){
+        if(idJuegos.contains(id)) {
+            idJuegos.remove(id);
+        }
+    }
 }
