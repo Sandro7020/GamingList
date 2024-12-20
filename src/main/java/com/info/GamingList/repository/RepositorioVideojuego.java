@@ -60,4 +60,23 @@ public class RepositorioVideojuego {
         videojuegos.add(videojuego);
         guardarDatos();
     }
+
+    public void actualizar(Videojuego videojuegoActual, Videojuego videojuegoActualizado) {
+        int index = videojuegos.indexOf(videojuegoActual);
+        if (index != -1) {
+            videojuegos.set(index, videojuegoActualizado);
+            guardarDatos();
+        } else {
+            System.out.println("El videojuego no se encontró en la lista.");
+        }
+    }
+
+    public boolean eliminarPorId(int id) {
+        cargarDatos();
+        boolean eliminado = videojuegos.removeIf(videojuego -> videojuego.getId() == id);
+        if (eliminado) {
+            guardarDatos();
+        }
+        return eliminado;
+    }
 }

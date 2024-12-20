@@ -38,6 +38,10 @@ public class ServicioVideojuego {
         return videojuego;
     }
 
+    public boolean eliminarJuego(int id) {
+        return repositorioVideojuego.eliminarPorId(id);
+    }
+
     public int calcularIdSiguiente() {
         List<Videojuego> videojuegos = obtenerVideojuegos();
         if (videojuegos.isEmpty()) {

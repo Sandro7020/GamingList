@@ -68,4 +68,18 @@ public class VideojuegoController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @PostMapping("/eliminar/{id}")
+    public ResponseEntity<?> eliminarVideojuego(@PathVariable int id) {
+        try {
+            boolean eliminado = servicioVideojuego.eliminarJuego(id);
+            if (eliminado) {
+                return new ResponseEntity<>(true, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
