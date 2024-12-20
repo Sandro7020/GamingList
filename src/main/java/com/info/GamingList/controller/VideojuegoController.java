@@ -69,7 +69,7 @@ public class VideojuegoController {
         }
     }
 
-    @PostMapping("/eliminar/{id}")
+    @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<?> eliminarVideojuego(@PathVariable int id) {
         try {
             boolean eliminado = servicioVideojuego.eliminarJuego(id);

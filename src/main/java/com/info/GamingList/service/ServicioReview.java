@@ -30,6 +30,10 @@ public class ServicioReview {
         return review;
     }
 
+    public boolean eliminarReviewPorId(int id) {
+        return repositorioReview.eliminarPorId(id);
+    }
+
     public float calcularCalificacionJuego(int id) {
         List<Review> reviews = repositorioReview.obtenerPorId(id);
         float calificacionPromedio = 0;

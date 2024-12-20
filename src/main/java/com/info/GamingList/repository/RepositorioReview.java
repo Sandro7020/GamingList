@@ -60,4 +60,13 @@ public class RepositorioReview {
         reviews.add(review);
         guardarDatos();
     }
+
+    public boolean eliminarPorId(int id) {
+        cargarDatos();
+        boolean eliminado = reviews.removeIf(review -> review.getIdJuego() == id);
+        if (eliminado) {
+            guardarDatos();
+        }
+        return eliminado;
+    }
 }
