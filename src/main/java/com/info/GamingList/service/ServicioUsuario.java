@@ -42,28 +42,19 @@ public class ServicioUsuario {
             userActual.setIdJuegos(new ArrayList<>());
         }
 
+        List<Integer> nuevaListaIds = new ArrayList<>(userActual.getIdJuegos());
+        Usuario userActualizado = new Usuario(userActual.getUsername(), userActual.getClave(), nuevaListaIds);
         if(opcion) {
             if (!userActual.getIdJuegos().contains(id)) {
-                List<Integer> nuevaListaIds = new ArrayList<>(userActual.getIdJuegos());
-                Usuario userActualizado = new Usuario(userActual.getUsername(), userActual.getClave(), nuevaListaIds);
-
                 userActualizado.agregarIdLista(id);
-
-                repositorioUsuario.actualizar(userActual, userActualizado);
-                return;
             }
         }
         else{
-            List<Integer> nuevaListaIds = new ArrayList<>(userActual.getIdJuegos());
-            Usuario userActualizado = new Usuario(userActual.getUsername(), userActual.getClave(), nuevaListaIds);
-
-            userActualizado.eliminarIdLista(id);
-
-            repositorioUsuario.actualizar(userActual, userActualizado);
-            return;
-
+            if (userActual.getIdJuegos().contains(id)) {
+                userActualizado.eliminarIdLista(id);
+            }
         }
-        throw new Exception("Error actualizando la lista");
+        repositorioUsuario.actualizar(userActual, userActualizado);
     }
 
     public boolean registrarUsuario(Usuario usuario) {

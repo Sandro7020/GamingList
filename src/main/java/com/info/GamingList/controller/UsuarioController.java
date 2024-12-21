@@ -26,7 +26,7 @@ public class UsuarioController {
         }
     }
 
-    @GetMapping("/eliminar/{username}/{id}")
+    @DeleteMapping("/eliminar/{username}/{id}")
     public ResponseEntity<?> eliminarIdJuego(@PathVariable String username, @PathVariable int id) {
         try {
             servicioUsuario.actualizarListaUsuario(username, id, false);
