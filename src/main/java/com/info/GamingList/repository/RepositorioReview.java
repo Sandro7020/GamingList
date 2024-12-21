@@ -67,4 +67,14 @@ public class RepositorioReview {
         guardarDatos();
         return true;
     }
+
+    public void eliminar(String usuario, int id) {
+        cargarDatos();
+        for(Review review : reviews){
+            if(review.getIdJuego() == id && review.getNomUsuario().equals(usuario)){
+                reviews.remove(review);
+            }
+        }
+        guardarDatos();
+    }
 }
