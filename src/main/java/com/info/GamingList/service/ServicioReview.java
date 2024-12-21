@@ -34,8 +34,8 @@ public class ServicioReview {
         return repositorioReview.eliminarPorId(id);
     }
 
-    public void eliminarReview(String usuario, int id) {
-        repositorioReview.eliminar(usuario ,id);
+    public boolean eliminarReviewPorUsuario(String usuario, int id) {
+        return repositorioReview.eliminarPorUsuario(usuario ,id);
     }
 
     public float calcularCalificacionJuego(int id) {

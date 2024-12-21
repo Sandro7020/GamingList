@@ -68,13 +68,10 @@ public class RepositorioReview {
         return true;
     }
 
-    public void eliminar(String usuario, int id) {
+    public boolean eliminarPorUsuario(String usuario, int id) {
         cargarDatos();
-        for(Review review : reviews){
-            if(review.getIdJuego() == id && review.getNomUsuario().equals(usuario)){
-                reviews.remove(review);
-            }
-        }
+        reviews.removeIf(review -> review.getIdJuego() == id && review.getNomUsuario().equals(usuario));
         guardarDatos();
+        return true;
     }
 }

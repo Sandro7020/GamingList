@@ -70,11 +70,15 @@ public class ReviewController {
         }
     }
 
-    @PostMapping("/eliminar/{id}")
-    public ResponseEntity<?> eliminarReview(@RequestBody String usuario, @PathVariable int id) {
+    @DeleteMapping("/eliminar/{usuario}/{id}")
+    public ResponseEntity<?> eliminarReviewUsuario(@PathVariable String usuario, @PathVariable int id) {
         try {
-            servicioReview.eliminarReview(usuario, id);
-            return new ResponseEntity<>(HttpStatus.OK);
+            boolean eliminado = servicioReview.eliminarReviewPorUsuario(usuario, id);
+            if (eliminado) {
+                return new ResponseEntity<>(true, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
