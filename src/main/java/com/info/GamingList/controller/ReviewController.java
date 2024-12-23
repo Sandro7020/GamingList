@@ -85,11 +85,12 @@ public class ReviewController {
     }
 
     @PutMapping("/modificar")
-    public ResponseEntity<?> modificarReview(@RequestBody Review review) {
+    public ResponseEntity<?> modificarReseña(@RequestBody Review review) {
+        servicioReview.modificarReview(review);
         try {
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-      }
+    }
 }
