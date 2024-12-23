@@ -56,6 +56,15 @@ public class RepositorioReview {
         return reviews.stream().filter(r -> r.getNomUsuario().equals(usuario)).toList();
     }
 
+    public Review obtenerEspecifica(String usuario, int id) {
+        cargarDatos();
+        for(Review review : reviews){
+            if(review.getIdJuego() == id && review.getNomUsuario().equals(usuario))
+                return review;
+        }
+        return null;
+    }
+
     public void agregar(Review review) {
         reviews.add(review);
         guardarDatos();
@@ -73,5 +82,16 @@ public class RepositorioReview {
         reviews.removeIf(review -> review.getIdJuego() == id && review.getNomUsuario().equals(usuario));
         guardarDatos();
         return true;
+    }
+
+
+    public void actualizar(Review reseñaActual, Review reseñaActualizado) {
+        int index = reviews.indexOf(reseñaActual);
+        if (index != -1) {
+            reviews.set(index, reseñaActualizado);
+            guardarDatos();
+        } else {
+            System.out.println("La reseña no se encontró en la lista.");
+        }
     }
 }

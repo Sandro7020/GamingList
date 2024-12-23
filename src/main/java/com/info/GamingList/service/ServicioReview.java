@@ -38,6 +38,11 @@ public class ServicioReview {
         return repositorioReview.eliminarPorUsuario(usuario ,id);
     }
 
+    public void modificarReview(Review reseñaModificado) {
+        Review reseñaActual = repositorioReview.obtenerEspecifica(reseñaModificado.getNomUsuario(), reseñaModificado.getIdJuego());
+        repositorioReview.actualizar(reseñaActual, reseñaModificado);
+    }
+
     public float calcularCalificacionJuego(int id) {
         List<Review> reviews = repositorioReview.obtenerPorId(id);
         float calificacionPromedio = 0;
