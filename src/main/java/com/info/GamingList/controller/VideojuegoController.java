@@ -82,4 +82,14 @@ public class VideojuegoController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @PutMapping("/modificar")
+    public ResponseEntity<?> modificarVideojuego(@RequestBody Videojuego videojuego) {
+        try {
+            servicioVideojuego.modificarJuego(videojuego);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

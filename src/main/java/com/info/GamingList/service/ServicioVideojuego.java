@@ -42,6 +42,11 @@ public class ServicioVideojuego {
         return repositorioVideojuego.eliminarPorId(id);
     }
 
+    public void modificarJuego(Videojuego videojuegoModificado) {
+        Videojuego videojuegoActual = obtenerVideojuego(videojuegoModificado.getId());
+        repositorioVideojuego.actualizar(videojuegoActual, videojuegoModificado);
+    }
+
     public int calcularIdSiguiente() {
         List<Videojuego> videojuegos = obtenerVideojuegos();
         if (videojuegos.isEmpty()) {
