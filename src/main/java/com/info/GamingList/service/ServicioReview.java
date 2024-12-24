@@ -25,6 +25,10 @@ public class ServicioReview {
         return false;
     }
 
+    public Review obtenerReviewUsuario(int id, String usuario) {
+        return repositorioReview.obtenerEspecifica(usuario, id);
+    }
+
     public Review agregarReview(Review review) {
         repositorioReview.agregar(review);
         return review;
@@ -38,9 +42,9 @@ public class ServicioReview {
         return repositorioReview.eliminarPorUsuario(usuario ,id);
     }
 
-    public void modificarReview(Review reseñaModificado) {
-        Review reseñaActual = repositorioReview.obtenerEspecifica(reseñaModificado.getNomUsuario(), reseñaModificado.getIdJuego());
-        repositorioReview.actualizar(reseñaActual, reseñaModificado);
+    public void modificarReview(Review reviewModificado) {
+        Review reviewActual = repositorioReview.obtenerEspecifica(reviewModificado.getNomUsuario(), reviewModificado.getIdJuego());
+        repositorioReview.actualizar(reviewActual, reviewModificado);
     }
 
     public float calcularCalificacionJuego(int id) {

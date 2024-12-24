@@ -25,11 +25,25 @@ public class ReviewController {
         }
     }
 
-    @GetMapping("consultar/{usuario}/{id}")
-    public ResponseEntity<?> consultarReviewByUsuario(@PathVariable int id, @PathVariable String usuario) {
+    @GetMapping("validar/{usuario}/{id}")
+    public ResponseEntity<?> verificarReviewByUsuario(@PathVariable int id, @PathVariable String usuario) {
         try {
             boolean existe = servicioReview.validarReviewUsuario(id, usuario);
             return new ResponseEntity<>(existe, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("consultar/{usuario}/{id}")
+    public ResponseEntity<?> consultarReviewByUsuario(@PathVariable int id, @PathVariable String usuario) {
+        try {
+            Review review = servicioReview.obtenerReviewUsuario(id, usuario);
+            if (review != null) {
+                return new ResponseEntity<>(review, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -85,9 +99,9 @@ public class ReviewController {
     }
 
     @PutMapping("/modificar")
-    public ResponseEntity<?> modificarReseña(@RequestBody Review review) {
-        servicioReview.modificarReview(review);
+    public ResponseEntity<?> modificarReview(@RequestBody Review review) {
         try {
+            servicioReview.modificarReview(review);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

@@ -85,10 +85,10 @@ public class RepositorioReview {
     }
 
 
-    public void actualizar(Review reseñaActual, Review reseñaActualizado) {
-        int index = reviews.indexOf(reseñaActual);
+    public void actualizar(Review reviewActual, Review reviewActualizado) {
+        int index = reviews.indexOf(reviewActual);
         if (index != -1) {
-            reviews.set(index, reseñaActualizado);
+            reviews.set(index, reviewActualizado);
             guardarDatos();
         } else {
             System.out.println("La reseña no se encontró en la lista.");
