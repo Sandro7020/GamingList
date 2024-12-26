@@ -9,8 +9,12 @@ public class EstatusJuego {
     private int idJuego;
 
     /* El estatus va a ser:
-    [1]: Jugando
-    [2]: Finalizado
+    [0]: Predeterminado
+    [1]: No jugado
+    [2]: Quiero jugar
+    [3]: Jugando
+    [4]: Completado
+    [5]: Completado 100%
     */
     private int estatus;
 

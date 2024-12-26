@@ -93,4 +93,14 @@ public class UsuarioController {
         }
     }
 
+    @PutMapping("/modificar/{username}/{id}")
+    public ResponseEntity<?> modificarEstatus(@RequestBody int estatus, @PathVariable String username, @PathVariable int id) {
+        try {
+            servicioUsuario.actualizarEstatusUsuario(username, estatus, id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }

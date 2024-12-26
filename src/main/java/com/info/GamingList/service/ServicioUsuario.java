@@ -53,7 +53,7 @@ public class ServicioUsuario {
 
         if(opcion) {
             if (!userActual.contieneJuego(id)) {
-                userActualizado.agregarIdLista(id, 1);
+                userActualizado.agregarIdLista(id, 0);
             }
         }
         else {
@@ -62,6 +62,14 @@ public class ServicioUsuario {
             }
         }
         repositorioUsuario.actualizar(userActual, userActualizado);
+    }
+
+    public void actualizarEstatusUsuario(String user, int estatus, int id) throws Exception {
+        Usuario userActual = repositorioUsuario.obtenerPorUsername(user);
+        if (userActual == null) {
+            throw new Exception("Usuario no encontrado");
+        }
+        userActual.actualizarEstatusJuego(id, estatus);
     }
 
     public boolean registrarUsuario(Usuario usuario) {
