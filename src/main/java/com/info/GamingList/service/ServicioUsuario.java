@@ -1,5 +1,6 @@
 package com.info.GamingList.service;
 
+import com.info.GamingList.model.EstatusJuego;
 import com.info.GamingList.model.Usuario;
 import com.info.GamingList.repository.RepositorioUsuario;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,12 @@ public class ServicioUsuario {
 
     public List<Integer> obtenerIds(String username) {
         Usuario user = repositorioUsuario.obtenerPorUsername(username);
-        return new ArrayList<>(user.getIdJuegos());
+        return user.obtenerIdJuegos();
+    }
+
+    public List<EstatusJuego> obtenerJuegos(String username) {
+        Usuario user = repositorioUsuario.obtenerPorUsername(username);
+        return user.getJuegos();
     }
 
     public void actualizarListaUsuario(String user, int id, boolean opcion) throws Exception {
@@ -38,19 +44,20 @@ public class ServicioUsuario {
             throw new Exception("Usuario no encontrado");
         }
 
-        if (userActual.getIdJuegos() == null) {
-            userActual.setIdJuegos(new ArrayList<>());
+        if (userActual.getJuegos() == null) {
+            userActual.setJuegos(new ArrayList<>());
         }
 
-        List<Integer> nuevaListaIds = new ArrayList<>(userActual.getIdJuegos());
-        Usuario userActualizado = new Usuario(userActual.getUsername(), userActual.getClave(), nuevaListaIds);
+        List<EstatusJuego> nuevaListaIds = userActual.getJuegos();
+        Usuario userActualizado = new Usuario(nuevaListaIds, userActual.getUsername(), userActual.getClave());
+
         if(opcion) {
-            if (!userActual.getIdJuegos().contains(id)) {
-                userActualizado.agregarIdLista(id);
+            if (!userActual.contieneJuego(id)) {
+                userActualizado.agregarIdLista(id, 1);
             }
         }
-        else{
-            if (userActual.getIdJuegos().contains(id)) {
+        else {
+            if (userActual.contieneJuego(id)) {
                 userActualizado.eliminarIdLista(id);
             }
         }

@@ -1,5 +1,6 @@
 package com.info.GamingList.controller;
 
+import com.info.GamingList.model.EstatusJuego;
 import com.info.GamingList.model.Usuario;
 import com.info.GamingList.service.ServicioUsuario;
 import org.springframework.http.HttpStatus;
@@ -49,7 +50,7 @@ public class UsuarioController {
     @GetMapping("/consultar/{username}/videojuegos")
     public ResponseEntity<?> consultarIdVideoJuegos(@PathVariable String username) {
         try {
-            List<Integer> idsJuegos = servicioUsuario.obtenerIds(username);
+            List<EstatusJuego> idsJuegos = servicioUsuario.obtenerJuegos(username);
             return new ResponseEntity<>(idsJuegos, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
