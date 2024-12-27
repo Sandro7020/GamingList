@@ -69,7 +69,11 @@ public class ServicioUsuario {
         if (userActual == null) {
             throw new Exception("Usuario no encontrado");
         }
-        userActual.actualizarEstatusJuego(id, estatus);
+
+        Usuario userActualizado = new Usuario(userActual.getJuegos(), userActual.getUsername(), userActual.getClave());
+        userActualizado.actualizarEstatusJuego(id, estatus);
+
+        repositorioUsuario.actualizar(userActual, userActualizado);
     }
 
     public boolean registrarUsuario(Usuario usuario) {
