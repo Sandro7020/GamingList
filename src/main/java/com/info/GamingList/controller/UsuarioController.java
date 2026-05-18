@@ -15,7 +15,11 @@ import java.util.Map;
 @RequestMapping("/api/auth")
 public class UsuarioController {
 
-    private static final ServicioUsuario servicioUsuario = new ServicioUsuario();
+    private final ServicioUsuario servicioUsuario;
+
+    public UsuarioController(ServicioUsuario servicioUsuario) {
+        this.servicioUsuario = servicioUsuario;
+    }
 
     @PostMapping("/agregar/{username}/{id}")
     public ResponseEntity<?> agregarIdJuego(@PathVariable String username, @PathVariable int id) {

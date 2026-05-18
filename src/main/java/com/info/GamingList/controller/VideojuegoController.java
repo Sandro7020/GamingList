@@ -13,7 +13,11 @@ import java.util.List;
 @RequestMapping("/api/videojuegos")
 public class VideojuegoController {
 
-    private static final ServicioVideojuego servicioVideojuego = new ServicioVideojuego();
+    private final ServicioVideojuego servicioVideojuego;
+
+    public VideojuegoController(ServicioVideojuego servicioVideojuego) {
+        this.servicioVideojuego = servicioVideojuego;
+    }
 
     @GetMapping("/consultar")
     public ResponseEntity<?> consultarVideojuegos() {

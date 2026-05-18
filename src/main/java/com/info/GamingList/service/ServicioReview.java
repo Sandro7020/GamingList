@@ -9,7 +9,11 @@ import java.util.List;
 @Service
 public class ServicioReview {
 
-    private static final RepositorioReview repositorioReview = new RepositorioReview();
+    private final RepositorioReview repositorioReview;
+
+    public ServicioReview(RepositorioReview repositorioReview) {
+        this.repositorioReview = repositorioReview;
+    }
 
     public List<Review> obtenerReviewsId(int id) {
         return repositorioReview.obtenerPorId(id);

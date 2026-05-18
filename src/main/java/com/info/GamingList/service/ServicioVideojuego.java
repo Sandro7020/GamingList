@@ -11,7 +11,11 @@ import java.util.Optional;
 @Service
 public class ServicioVideojuego {
 
-    private static final RepositorioVideojuego repositorioVideojuego = new RepositorioVideojuego();
+    private final RepositorioVideojuego repositorioVideojuego;
+
+    public ServicioVideojuego(RepositorioVideojuego repositorioVideojuego) {
+        this.repositorioVideojuego = repositorioVideojuego;
+    }
 
     public List<Videojuego> obtenerVideojuegos() {
         return repositorioVideojuego.obtenerTodos();

@@ -13,7 +13,11 @@ import java.util.Optional;
 @Service
 public class ServicioUsuario {
 
-    private final static RepositorioUsuario repositorioUsuario = new RepositorioUsuario();
+    private final RepositorioUsuario repositorioUsuario;
+
+    public ServicioUsuario(RepositorioUsuario repositorioUsuario) {
+        this.repositorioUsuario = repositorioUsuario;
+    }
 
     public Usuario validarUsuario(String username, String clave) {
         Usuario user = repositorioUsuario.obtenerPorUsername(username);

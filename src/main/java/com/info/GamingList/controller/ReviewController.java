@@ -13,7 +13,11 @@ import java.util.List;
 @RequestMapping("/api/reviews")
 public class ReviewController {
 
-    private static final ServicioReview servicioReview = new ServicioReview();
+    private final ServicioReview servicioReview;
+
+    public ReviewController(ServicioReview servicioReview) {
+        this.servicioReview = servicioReview;
+    }
 
     @GetMapping("/consultar/{id}")
     public ResponseEntity<?> consultarReviews(@PathVariable int id) {
